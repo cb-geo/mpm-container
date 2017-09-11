@@ -1,0 +1,17 @@
+sudo: required
+
+language: ruby
+
+services:
+    - docker
+
+before_install:
+    - docker build -t "cbgeo/mpm" ./
+    - docker run -ti cbgeo/mpm /bin/bash -c "cd /"
+    - docker ps -a
+
+script:
+    - echo "Built success"
+
+notifications:
+  slack: cb-geo:0N3fJy823MGsJvcDB91m4p8H
