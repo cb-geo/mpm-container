@@ -12,7 +12,7 @@
 # Using the docker image
 * The docker image can be used directly from the Docker Hub or Quay.io
 * Pull the docker image `docker pull cbgeo/mpm` or `docker pull quay.io/cbgeo/mpm`
-* To launch the `cbgeo/ca-abm`  docker container, run `docker run -ti cbgeo/mpm:latest /bin/bash` or `docker run -ti quay.io/cbgeo/mpm:latest /bin/bash`
+* To launch the `cbgeo/mpm`  docker container, run `docker run -ti cbgeo/mpm:latest /bin/bash` or `docker run -ti quay.io/cbgeo/mpm:latest /bin/bash`
 
 # To login as root
 * Launching docker as root user: `docker exec -u 0 -ti <containerid> /bin/bash`
