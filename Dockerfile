@@ -10,6 +10,8 @@ RUN dnf update -y && \
                    voro++ voro++-devel vtk vtk-devel wget && \
 dnf clean all
 
+# Coverage 
+RUN wget http://ftp.de.debian.org/debian/pool/main/l/lcov/lcov_1.11.orig.tar.gz && tar xf lcov_1.11.orig.tar.gz && make -C lcov-1.11/ install
 
 # Install Intel Threaded Building blocks
 ENV TBB_VERSION 2017_20160916
