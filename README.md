@@ -3,11 +3,16 @@
 
 [![Quay image](https://img.shields.io/badge/quay--image-cbgeo--mpm-ff69b4.svg)](https://quay.io/repository/cbgeo/mpm)
 [![Docker hub](https://img.shields.io/badge/docker--hub-cbgeo--mpm-ff69b4.svg)](https://hub.docker.com/r/cbgeo/mpm)
-[![Build status](https://api.travis-ci.org/cb-geo/mpm-container.svg)](https://travis-ci.org/cb-geo/mpm-container)
+[![CircleCI](https://circleci.com/gh/cb-geo/mpm-container.svg?style=svg)](https://circleci.com/gh/cb-geo/mpm-container)
 [![](https://images.microbadger.com/badges/image/cbgeo/mpm.svg)](http://microbadger.com/images/cbgeo/mpm)
 
 ## Tools
-* Dealii
+* Clang 4.0
+* CMake 3
+* Eigen 3.
+* GCC 7
+* Vim
+* IntelTBB
 
 # Using the docker image
 * The docker image can be used directly from the Docker Hub or Quay.io
