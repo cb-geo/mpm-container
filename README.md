@@ -7,10 +7,10 @@
 [![](https://images.microbadger.com/badges/image/cbgeo/mpm.svg)](http://microbadger.com/images/cbgeo/mpm)
 
 ## Tools
-* Clang 4.0
+* Clang 6.0
 * CMake 3
-* Eigen 3.
-* GCC 7
+* Eigen 3
+* GCC 8
 * Vim
 * IntelTBB
 
