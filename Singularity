@@ -11,7 +11,6 @@ dnf install -y boost boost-devel clang clang-tools-extra cmake cppcheck eigen3-d
 dnf clean all
 
 mkdir -p /research && cd /research 
-cd /home/cbgeo/research && \
 git clone https://github.com/cb-geo/mpm.git
 
 %runscript
