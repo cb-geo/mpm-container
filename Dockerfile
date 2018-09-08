@@ -6,8 +6,8 @@ RUN dnf update -y && \
     dnf remove -y vim-minimal python sqlite && \
     dnf install -y boost boost-devel clang clang-tools-extra cmake cppcheck eigen3-devel \
                    findutils gcc gcc-c++ git hdf5 hdf5-devel kernel-devel lcov \
-                   make openmpi openmpi-devel sqlite sqlite-devel tar tbb tbb-devel \
-                   valgrind vim voro++ voro++-devel vtk vtk-devel wget && \
+                   make openmpi openmpi-devel tar tbb tbb-devel \
+                   valgrind vim vtk vtk-devel wget && \
 dnf clean all
 
 # Create a user cbgeo
