@@ -10,12 +10,13 @@ RUN dnf update -y && \
                    valgrind vim vtk vtk-devel wget && \
 dnf clean all
 
-# Create a user cbgeo
-RUN useradd cbgeo
-USER cbgeo
 
 # Load OpenMPI module
 RUN module load mpi/openmpi-x86_64
+
+# Create a user cbgeo
+RUN useradd cbgeo
+USER cbgeo
 
 # Create a research directory and clone git repo of mpm code
 RUN mkdir -p /home/cbgeo/research && \
