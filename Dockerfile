@@ -12,7 +12,7 @@ dnf clean all
 
 
 # Load OpenMPI module
-RUN sudo dnf -y module install openmpi openmpi-devel
+RUN dnf -y module install openmpi openmpi-devel
 RUN export MODULEPATH=$MODULEPATH:/usr/share/modulefiles
 RUN source /etc/profile.d/modules.sh && module load mpi/openmpi-x86_64
 
