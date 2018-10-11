@@ -12,7 +12,7 @@ dnf clean all
 
 
 # Load OpenMPI module
-RUN module load mpi/openmpi-x86_64
+RUN source /etc/profile.d/modules.sh && module load mpi/openmpi-x86_64
 
 # Create a user cbgeo
 RUN useradd cbgeo
