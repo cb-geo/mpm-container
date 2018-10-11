@@ -14,6 +14,9 @@ dnf clean all
 RUN useradd cbgeo
 USER cbgeo
 
+# Load OpenMPI module
+RUN module load mpi/openmpi-x86_64
+
 # Create a research directory and clone git repo of mpm code
 RUN mkdir -p /home/cbgeo/research && \
     cd /home/cbgeo/research && \

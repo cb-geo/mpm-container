@@ -10,6 +10,8 @@ dnf install -y boost boost-devel clang clang-tools-extra cmake cppcheck eigen3-d
                    valgrind vim vtk vtk-devel wget && \
 dnf clean all
 
+module load mpi/openmpi-x86_64
+
 mkdir -p /research && cd /research 
 git clone https://github.com/cb-geo/mpm.git
 
