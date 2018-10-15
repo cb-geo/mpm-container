@@ -10,7 +10,10 @@ dnf install -y boost boost-devel clang clang-tools-extra cmake cppcheck eigen3-d
                    valgrind vim vtk vtk-devel wget && \
 dnf clean all
 
-module load mpi/openmpi-x86_64
+git clone https://gitlab.onelab.info/gmsh/gmsh.git --depth 1
+cd gmsh && mkdir build && cd build && cmake -DENABLE_BUILD_DYNAMIC=1 .. && make && make install
+
+source /etc/profile.d/modules.sh && export MODULEPATH=$MODULEPATH:/usr/share/modulefiles && module load mpi/openmpi-x86_64
 
 mkdir -p /research && cd /research 
 git clone https://github.com/cb-geo/mpm.git
