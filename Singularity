@@ -1,5 +1,5 @@
 BootStrap:docker
-From:fedora:latest
+From:fedora:29
 
 %post
 dnf update -y && \
