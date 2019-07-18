@@ -1,4 +1,4 @@
-FROM fedora:29
+FROM fedora:30
 MAINTAINER Krishna Kumar <kks32@cam.ac.uk>
 
 # Update to latest packages, remove vim-minimal & Install Git, GCC, Clang, Autotools and VIM
@@ -16,6 +16,19 @@ RUN cd gmsh && mkdir build && cd build && cmake -DENABLE_BUILD_DYNAMIC=1 .. && m
 
 # Load OpenMPI module
 RUN source /etc/profile.d/modules.sh && export MODULEPATH=$MODULEPATH:/usr/share/modulefiles && module load mpi/openmpi-x86_64
+
+# METIS and PARMETIS
+RUN wget http://glaros.dtc.umn.edu/gkhome/fetch/sw/parmetis/parmetis-4.0.3.tar.gz && \
+    tar -xf parmetis-4.0.3.tar.gz && \
+    cd parmetis-4.0.3/ && \
+    make config shared=1 cc=mpicc cxx=mpic++ && \
+    make install && cd .. && rm -rf parmetis*
+
+RUN wget http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz && \
+    tar -xf metis-5.1.0.tar.gz && \
+    cd metis-5.1.0/ && \
+    make config shared=1 cc=mpicc cxx=mpic++ && \
+    make install && cd .. && rm -rf metis*
 
 # Create a user cbgeo
 RUN useradd cbgeo
