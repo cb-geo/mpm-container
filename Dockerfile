@@ -15,7 +15,8 @@ RUN git clone https://gitlab.onelab.info/gmsh/gmsh.git --depth 1
 RUN cd gmsh && mkdir build && cd build && cmake -DENABLE_BUILD_DYNAMIC=1 .. && make && make install && export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64/
 
 # Load OpenMPI module
-RUN source /etc/profile.d/modules.sh && export MODULEPATH=$MODULEPATH:/usr/share/modulefiles && module load mpi/openmpi-x86_64
+# RUN source /etc/profile.d/modules.sh && export MODULEPATH=$MODULEPATH:/usr/share/modulefiles && module load mpi/openmpi-x86_64
+ENV PATH="/usr/lib64/openmpi/bin/:${PATH}"
 
 # METIS and PARMETIS
 RUN wget http://glaros.dtc.umn.edu/gkhome/fetch/sw/parmetis/parmetis-4.0.3.tar.gz && \
