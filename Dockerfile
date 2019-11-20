@@ -6,7 +6,7 @@ RUN dnf update -y && \
     dnf remove -y vim-minimal python sqlite && \
     dnf install -y boost boost-devel clang clang-analyzer clang-tools-extra cmake cppcheck eigen3-devel \
                    findutils gcc gcc-c++ git hdf5 hdf5-devel kernel-devel lcov \
-                   make openmpi openmpi-devel tar tbb tbb-devel \
+                   make ninja-build openmpi openmpi-devel tar tbb tbb-devel \
                    valgrind vim vtk vtk-devel wget && \
 dnf clean all
 
