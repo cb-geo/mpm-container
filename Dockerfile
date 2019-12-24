@@ -37,7 +37,7 @@ USER cbgeo
 
 # KaHIP
 
-RUN cd /home/cbgeo/ && git clone git@github.com:schulzchristian/KaHIP.git && \
+RUN cd /home/cbgeo/ && git clone https://github.com/schulzchristian/KaHIP.git && \
     cd KaHIP && sh ./compile_withcmake.sh
 
 # Create a research directory and clone git repo of mpm code
