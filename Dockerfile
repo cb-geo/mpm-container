@@ -35,6 +35,11 @@ RUN wget http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz && \
 RUN useradd cbgeo
 USER cbgeo
 
+# KaHIP
+
+RUN cd /home/cbgeo/ && git clone git@github.com:schulzchristian/KaHIP.git && \
+    cd KaHIP && sh ./compile_withcmake.sh
+
 # Create a research directory and clone git repo of mpm code
 RUN mkdir -p /home/cbgeo/research && \
     cd /home/cbgeo/research && \
