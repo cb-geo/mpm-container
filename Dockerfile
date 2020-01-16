@@ -5,7 +5,7 @@ MAINTAINER Krishna Kumar <kks32@cam.ac.uk>
 RUN dnf update -y && \
     dnf remove -y vim-minimal python sqlite && \
     dnf install -y boost boost-devel clang clang-analyzer clang-tools-extra cmake cppcheck eigen3-devel \
-                   findutils gcc gcc-c++ git hdf5 hdf5-devel kernel-devel lcov \
+                   findutils freeglut freeglut-devel gcc gcc-c++ git hdf5 hdf5-devel kernel-devel lcov libnsl \
                    make ninja-build openmpi openmpi-devel tar tbb tbb-devel \
                    valgrind vim vtk vtk-devel wget && \
 dnf clean all
@@ -18,25 +18,24 @@ RUN cd gmsh && mkdir build && cd build && cmake -DENABLE_BUILD_DYNAMIC=1 .. && m
 # RUN source /etc/profile.d/modules.sh && export MODULEPATH=$MODULEPATH:/usr/share/modulefiles && module load mpi/openmpi-x86_64
 ENV PATH="/usr/lib64/openmpi/bin/:${PATH}"
 
-# METIS and PARMETIS
-RUN wget http://glaros.dtc.umn.edu/gkhome/fetch/sw/parmetis/parmetis-4.0.3.tar.gz && \
-    tar -xf parmetis-4.0.3.tar.gz && \
-    cd parmetis-4.0.3/ && \
-    make config shared=1 cc=mpicc cxx=mpic++ && \
-    make install && cd .. && rm -rf parmetis*
-
-RUN wget http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/metis-5.1.0.tar.gz && \
-    tar -xf metis-5.1.0.tar.gz && \
-    cd metis-5.1.0/ && \
-    make config shared=1 cc=mpicc cxx=mpic++ && \
-    make install && cd .. && rm -rf metis*
+# Install MKL
+RUN dnf config-manager --add-repo https://yum.repos.intel.com/mkl/setup/intel-mkl.repo && \
+    rpm --import https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB && \
+    dnf install -y intel-mkl
 
 # Create a user cbgeo
 RUN useradd cbgeo
 USER cbgeo
 
-# KaHIP
+# Configure MKL
+RUN echo "source /opt/intel/bin/compilervars.sh -arch intel64 -platform linux" >> ~/.bashrc
+RUN echo "source /opt/intel/mkl/bin/mklvars.sh intel64" >> ~/.bashrc
 
+# Partio
+RUN cd /home/cbgeo/ && git clone https://github.com/wdas/partio.git && \
+    cd partio && cmake . && make
+
+# KaHIP
 RUN cd /home/cbgeo/ && git clone https://github.com/schulzchristian/KaHIP.git && \
     cd KaHIP && sh ./compile_withcmake.sh
 
