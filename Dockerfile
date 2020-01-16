@@ -4,9 +4,9 @@ MAINTAINER Krishna Kumar <kks32@cam.ac.uk>
 # Update to latest packages, remove vim-minimal & Install Git, GCC, Clang, Autotools and VIM
 RUN dnf update -y && \
     dnf remove -y vim-minimal python sqlite && \
-    dnf install -y boost boost-devel clang clang-analyzer clang-tools-extra cmake cppcheck eigen3-devel \
-                   findutils freeglut freeglut-devel gcc gcc-c++ git hdf5 hdf5-devel kernel-devel lcov libnsl \
-                   make ninja-build openmpi openmpi-devel tar tbb tbb-devel \
+    dnf install -y boost boost-devel clang clang-analyzer clang-tools-extra cmake cppcheck dnf-plugins-core \
+                   eigen3-devel findutils freeglut freeglut-devel gcc gcc-c++ git hdf5 hdf5-devel \
+                   kernel-devel lcov libnsl make ninja-build openmpi openmpi-devel tar tbb tbb-devel \
                    valgrind vim vtk vtk-devel wget && \
 dnf clean all
 
