@@ -40,7 +40,7 @@ RUN cd /home/cbgeo/ && git clone https://github.com/schulzchristian/KaHIP.git &&
     cd KaHIP && sh ./compile_withcmake.sh
 
 # PETSc
-RUN git clone -b maint https://gitlab.com/petsc/petsc.git petsc && \
+RUN cd /home/cbgeo/ && git clone -b maint https://gitlab.com/petsc/petsc.git petsc && \
     ./configure PETSC_ARCH=linux-gnu && make PETSC_ARCH=linux-gnu all test -j2
 
 # Create a research directory and clone git repo of mpm code
