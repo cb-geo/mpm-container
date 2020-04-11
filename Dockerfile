@@ -11,8 +11,8 @@ RUN dnf update -y && \
 dnf clean all
 
 # Install GMSH
-RUN git clone https://gitlab.onelab.info/gmsh/gmsh.git --depth 1
-RUN cd gmsh && mkdir build && cd build && cmake -DENABLE_BUILD_DYNAMIC=1 .. && make && make install && export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64/
+# RUN git clone https://gitlab.onelab.info/gmsh/gmsh.git --depth 1
+# RUN cd gmsh && mkdir build && cd build && cmake -DENABLE_BUILD_DYNAMIC=1 .. && make && make install && export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64/
 
 # Load OpenMPI module
 # RUN source /etc/profile.d/modules.sh && export MODULEPATH=$MODULEPATH:/usr/share/modulefiles && module load mpi/openmpi-x86_64
