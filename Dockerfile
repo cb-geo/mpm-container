@@ -42,6 +42,8 @@ RUN cd /home/cbgeo/ && git clone https://github.com/schulzchristian/KaHIP.git &&
 # PETSc
 RUN cd /home/cbgeo/ && git clone -b maint https://gitlab.com/petsc/petsc.git petsc && \
     cd petsc && ./configure --with-debugging=0 && make -j2
+ENV PETSC_ARCH=arch-linux2-c-opt
+ENV PETSC_DIR=/home/cbgeo/petsc/
 
 # Create a research directory and clone git repo of mpm code
 RUN mkdir -p /home/cbgeo/research && \
