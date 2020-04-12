@@ -31,19 +31,19 @@ USER cbgeo
 RUN echo "source /opt/intel/bin/compilervars.sh -arch intel64 -platform linux" >> ~/.bashrc
 RUN echo "source /opt/intel/mkl/bin/mklvars.sh intel64" >> ~/.bashrc
 
-# Partio
-RUN cd /home/cbgeo/ && git clone https://github.com/wdas/partio.git && \
-    cd partio && cmake . && make
-
-# KaHIP
-RUN cd /home/cbgeo/ && git clone https://github.com/schulzchristian/KaHIP.git && \
-    cd KaHIP && sh ./compile_withcmake.sh
-
 # PETSc
 RUN cd /home/cbgeo/ && git clone -b maint https://gitlab.com/petsc/petsc.git petsc && \
     cd petsc && ./configure --with-debugging=0 && make -j2
 ENV PETSC_ARCH=arch-linux2-c-opt
 ENV PETSC_DIR=/home/cbgeo/petsc/
+
+# KaHIP
+RUN cd /home/cbgeo/ && git clone https://github.com/schulzchristian/KaHIP.git && \
+    cd KaHIP && sh ./compile_withcmake.sh
+
+# Partio
+RUN cd /home/cbgeo/ && git clone https://github.com/wdas/partio.git && \
+    cd partio && cmake . && make
 
 # Create a research directory and clone git repo of mpm code
 RUN mkdir -p /home/cbgeo/research && \
