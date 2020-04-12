@@ -7,7 +7,7 @@ RUN dnf update -y && \
     dnf install -y boost boost-devel clang clang-analyzer clang-tools-extra cmake cppcheck dnf-plugins-core \
                    eigen3-devel findutils freeglut freeglut-devel gcc gcc-c++ git hdf5 hdf5-devel \
                    kernel-devel lcov libnsl make ninja-build openblas openblas-devel openblas-openmp \
-                   openmpi openmpi-devel tar tbb tbb-devel valgrind vim vtk vtk-devel wget && \
+                   openmpi openmpi-devel python tar tbb tbb-devel valgrind vim vtk vtk-devel wget && \
 dnf clean all
 
 # Install GMSH
@@ -41,7 +41,7 @@ RUN cd /home/cbgeo/ && git clone https://github.com/schulzchristian/KaHIP.git &&
 
 # PETSc
 RUN cd /home/cbgeo/ && git clone -b maint https://gitlab.com/petsc/petsc.git petsc && \
-    cd petsc && ./configure PETSC_ARCH=linux-gnu && make PETSC_ARCH=linux-gnu all test -j2
+    cd petsc && ./configure --with-debugging=0 && make -j2
 
 # Create a research directory and clone git repo of mpm code
 RUN mkdir -p /home/cbgeo/research && \
