@@ -1,5 +1,5 @@
-FROM fedora:30
-MAINTAINER Krishna Kumar <kks32@cam.ac.uk>
+FROM fedora:31
+MAINTAINER Krishna Kumar <krishnak@utexas.edu>
 
 # Update to latest packages, remove vim-minimal & Install Git, GCC, Clang, Autotools and VIM
 RUN dnf update -y && \
