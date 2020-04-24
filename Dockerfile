@@ -1,4 +1,4 @@
-FROM fedora:32
+FROM fedora:31
 MAINTAINER Krishna Kumar <krishnak@utexas.edu>
 
 # Update to latest packages, remove vim-minimal & Install Git, GCC, Clang, Autotools and VIM
