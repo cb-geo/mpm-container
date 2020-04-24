@@ -1,4 +1,4 @@
-FROM fedora:31
+FROM fedora:32
 MAINTAINER Krishna Kumar <krishnak@utexas.edu>
 
 # Update to latest packages, remove vim-minimal & Install Git, GCC, Clang, Autotools and VIM
@@ -33,8 +33,9 @@ RUN echo "source /opt/intel/mkl/bin/mklvars.sh intel64" >> ~/.bashrc
 
 # PETSc
 RUN cd /home/cbgeo/ && git clone -b maint https://gitlab.com/petsc/petsc.git petsc && \
-    cd petsc && ./configure --with-debugging=0 && make -j2
-ENV PETSC_ARCH=arch-linux2-c-opt
+    cd petsc && ./configure PETSC_DIR=/home/cbgeo/petsc/ --with-debugging=0 COPTFLAGS='-O3 -march=arch-linux2-c-opt -mtune=native' CXXOPTFLAGS='-O3 -march=arch-linux2-c-opt -mtune=native' && make PETSC_DIR=/home/cbgeo/petsc PETSC_ARCH=arch-linux-c-opt all -j2 && \
+    make PETSC_DIR=/home/cbgeo/petsc PETSC_ARCH=arch-linux-c-opt check
+ENV PETSC_ARCH=arch-linux-c-opt
 ENV PETSC_DIR=/home/cbgeo/petsc/
 
 # KaHIP
