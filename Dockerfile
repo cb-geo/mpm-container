@@ -7,8 +7,11 @@ RUN dnf update -y && \
     dnf install -y boost boost-devel clang clang-analyzer clang-tools-extra cmake cppcheck dnf-plugins-core \
                    eigen3-devel findutils freeglut freeglut-devel gcc gcc-c++ git hdf5 hdf5-devel \
                    kernel-devel lcov libnsl make ninja-build openblas openblas-devel openblas-openmp \
-                   openmpi openmpi-devel python tar tbb tbb-devel valgrind vim vtk vtk-devel wget && \
+                   openmpi openmpi-devel python pip tar tbb tbb-devel valgrind vim vtk vtk-devel wget && \
 dnf clean all
+
+# Install pandas
+RUN pip3 install pandas
 
 # Install GMSH
 # RUN git clone https://gitlab.onelab.info/gmsh/gmsh.git --depth 1
