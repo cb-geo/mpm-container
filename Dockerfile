@@ -11,8 +11,8 @@ RUN dnf update -y && \
                    valgrind vim vtk vtk-devel wget && \
 dnf clean all
 
-# Install pandas
-RUN pip3 install pandas
+# Install pandas and tables
+RUN pip3 install pandas tables
 
 # Install GMSH
 # RUN git clone https://gitlab.onelab.info/gmsh/gmsh.git --depth 1
@@ -34,7 +34,6 @@ RUN echo "source /opt/intel/mkl/bin/mklvars.sh intel64" >> ~/.bashrc
 # Load OpenMPI module
 RUN source /etc/profile.d/modules.sh && export MODULEPATH=$MODULEPATH:/usr/share/modulefiles && module load mpi/openmpi-x86_64
 ENV PATH="/usr/lib64/openmpi/bin/:${PATH}"
-
 
 # PETSc
 RUN cd /home/cbgeo/ && git clone --depth 1 -b maint https://gitlab.com/petsc/petsc.git petsc && \
