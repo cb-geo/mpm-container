@@ -5,7 +5,7 @@ MAINTAINER Krishna Kumar <krishnak@utexas.edu>
 RUN dnf update -y && \
     dnf remove -y vim-minimal sqlite && \
     dnf install -y boost boost-devel clang clang-analyzer clang-tools-extra cmake cppcheck dnf-plugins-core \
-                   eigen3-devel findutils freeglut freeglut-devel gcc gcc-c++ git hdf5 hdf5-devel \
+                   diffutils eigen3-devel findutils freeglut freeglut-devel gcc gcc-c++ git hdf5 hdf5-devel \
                    kernel-devel lcov libnsl libXext libXext-devel make ninja-build openblas openblas-devel \
                    openblas-openmp openmpi openmpi-devel python pip tar tbb tbb-devel \
                    valgrind vim vtk vtk-devel wget && \
