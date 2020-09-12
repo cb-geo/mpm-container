@@ -7,12 +7,9 @@ RUN dnf update -y && \
     dnf install -y boost boost-devel clang clang-analyzer clang-tools-extra cmake cppcheck dnf-plugins-core \
                    diffutils eigen3-devel findutils freeglut freeglut-devel gcc gcc-c++ git hdf5 hdf5-devel \
                    kernel-devel lcov libnsl libXext libXext-devel make ninja-build openblas openblas-devel \
-                   openblas-openmp openmpi openmpi-devel python pip tar tbb tbb-devel \
+                   openblas-openmp python pip tar tbb tbb-devel \
                    valgrind vim vtk vtk-devel wget && \
 dnf clean all
-
-# Install pandas and tables
-RUN pip3 install pandas tables
 
 # Install GMSH
 # RUN git clone https://gitlab.onelab.info/gmsh/gmsh.git --depth 1
@@ -22,38 +19,50 @@ RUN pip3 install pandas tables
 RUN dnf config-manager --add-repo https://yum.repos.intel.com/mkl/setup/intel-mkl.repo && \
     rpm --import https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB && \
     dnf install -y intel-mkl
-
+    
+# Install Intel MPI
+RUN dnf config-manager --add-repo https://yum.repos.intel.com/mpi/setup/intel-mpi.repo && \
+    rpm --import https://yum.repos.intel.com/mpi/setup/PUBLIC_KEY.PUB && \
+    dnf install -y intel-mpi-2019.8-108.x86_64
+    
 # Create a user cbgeo
 RUN useradd cbgeo
 USER cbgeo
+
+# Install pandas and tables
+RUN pip3 install pandas tables --user
 
 # Configure MKL
 RUN echo "source /opt/intel/bin/compilervars.sh -arch intel64 -platform linux" >> ~/.bashrc
 RUN echo "source /opt/intel/mkl/bin/mklvars.sh intel64" >> ~/.bashrc
 
+# Configure MPI
+RUN echo "source /opt/intel/compilers_and_libraries_2020.2.254/linux/mpi/intel64/bin/mpivars.sh" >> ~/.bashrc
+
 # Load OpenMPI module
-RUN source /etc/profile.d/modules.sh && export MODULEPATH=$MODULEPATH:/usr/share/modulefiles && module load mpi/openmpi-x86_64
-ENV PATH="/usr/lib64/openmpi/bin/:${PATH}"
+#RUN source /etc/profile.d/modules.sh && export MODULEPATH=$MODULEPATH:/usr/share/modulefiles && module load mpi/openmpi-x86_64
+#ENV PATH="/usr/lib64/openmpi/bin/:${PATH}"
+
 
 # PETSc
 RUN cd /home/cbgeo/ && git clone --depth 1 -b maint https://gitlab.com/petsc/petsc.git petsc && \
     cd petsc && ./configure PETSC_DIR=/home/cbgeo/petsc/ --with-debugging=0 COPTFLAGS='-O3 -march=arch-linux2-c-opt -mtune=native' CXXOPTFLAGS='-O3 -march=arch-linux2-c-opt -mtune=native' && make PETSC_DIR=/home/cbgeo/petsc PETSC_ARCH=arch-linux-c-opt all -j2 && \
     make PETSC_DIR=/home/cbgeo/petsc PETSC_ARCH=arch-linux-c-opt check
-ENV PETSC_ARCH=arch-linux-c-opt
-ENV PETSC_DIR=/home/cbgeo/petsc/
+#ENV PETSC_ARCH=arch-linux-c-opt
+#ENV PETSC_DIR=/home/cbgeo/petsc/
 
 # KaHIP
-RUN cd /home/cbgeo/ && git clone https://github.com/schulzchristian/KaHIP.git && \
-    cd KaHIP && sh ./compile_withcmake.sh
+#RUN cd /home/cbgeo/ && git clone https://github.com/schulzchristian/KaHIP.git && \
+#    cd KaHIP && sh ./compile_withcmake.sh
 
 # Partio
-RUN cd /home/cbgeo/ && git clone https://github.com/wdas/partio.git && \
-    cd partio && cmake . && make
+#RUN cd /home/cbgeo/ && git clone https://github.com/wdas/partio.git && \
+#    cd partio && cmake . && make
 
 # Create a research directory and clone git repo of mpm code
-RUN mkdir -p /home/cbgeo/research && \
-    cd /home/cbgeo/research && \
-    git clone https://github.com/cb-geo/mpm.git
+#RUN mkdir -p /home/cbgeo/research && \
+#    cd /home/cbgeo/research && \
+#    git clone https://github.com/cb-geo/mpm.git
 
 # Done
 WORKDIR /home/cbgeo/research/mpm
