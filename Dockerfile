@@ -48,16 +48,16 @@ RUN echo "source /opt/intel/compilers_and_libraries_2020.2.254/linux/mpi/intel64
 RUN cd /home/cbgeo/ && git clone --depth 1 -b maint https://gitlab.com/petsc/petsc.git petsc && \
     cd petsc && ./configure PETSC_DIR=/home/cbgeo/petsc/ --with-debugging=0 COPTFLAGS='-O3 -march=arch-linux2-c-opt -mtune=native' CXXOPTFLAGS='-O3 -march=arch-linux2-c-opt -mtune=native' && make PETSC_DIR=/home/cbgeo/petsc PETSC_ARCH=arch-linux-c-opt all -j2 && \
     make PETSC_DIR=/home/cbgeo/petsc PETSC_ARCH=arch-linux-c-opt check
-#ENV PETSC_ARCH=arch-linux-c-opt
-#ENV PETSC_DIR=/home/cbgeo/petsc/
+ENV PETSC_ARCH=arch-linux-c-opt
+ENV PETSC_DIR=/home/cbgeo/petsc/
 
 # KaHIP
-#RUN cd /home/cbgeo/ && git clone https://github.com/schulzchristian/KaHIP.git && \
-#    cd KaHIP && sh ./compile_withcmake.sh
+RUN cd /home/cbgeo/ && git clone https://github.com/schulzchristian/KaHIP.git && \
+    cd KaHIP && sh ./compile_withcmake.sh
 
 # Partio
-#RUN cd /home/cbgeo/ && git clone https://github.com/wdas/partio.git && \
-#    cd partio && cmake . && make
+RUN cd /home/cbgeo/ && git clone https://github.com/wdas/partio.git && \
+    cd partio && cmake . && make
 
 # Create a research directory and clone git repo of mpm code
 #RUN mkdir -p /home/cbgeo/research && \
