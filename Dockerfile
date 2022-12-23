@@ -45,11 +45,11 @@ RUN echo "source /opt/intel/compilers_and_libraries_2020.2.254/linux/mpi/intel64
 
 
 # PETSc
-RUN cd /home/cbgeo/ && git clone --depth 1 -b main https://gitlab.com/petsc/petsc.git petsc && \
-    cd petsc && ./configure PETSC_DIR=/home/cbgeo/petsc/ --with-debugging=0 COPTFLAGS='-O3 -march=arch-linux2-c-opt -mtune=native' CXXOPTFLAGS='-O3 -march=arch-linux2-c-opt -mtune=native' && make PETSC_DIR=/home/cbgeo/petsc PETSC_ARCH=arch-linux-c-opt all -j2 && \
-    make PETSC_DIR=/home/cbgeo/petsc PETSC_ARCH=arch-linux-c-opt check
-ENV PETSC_ARCH=arch-linux-c-opt
-ENV PETSC_DIR=/home/cbgeo/petsc/
+# RUN cd /home/cbgeo/ && git clone --depth 1 -b main https://gitlab.com/petsc/petsc.git petsc && \
+#    cd petsc && ./configure PETSC_DIR=/home/cbgeo/petsc/ --with-debugging=0 COPTFLAGS='-O3 -march=arch-linux2-c-opt -mtune=native' CXXOPTFLAGS='-O3 -march=arch-linux2-c-opt -mtune=native' && make PETSC_DIR=/home/cbgeo/petsc PETSC_ARCH=arch-linux-c-opt all -j2 && \
+#    make PETSC_DIR=/home/cbgeo/petsc PETSC_ARCH=arch-linux-c-opt check
+#ENV PETSC_ARCH=arch-linux-c-opt
+#ENV PETSC_DIR=/home/cbgeo/petsc/
 
 # KaHIP
 RUN cd /home/cbgeo/ && git clone https://github.com/schulzchristian/KaHIP.git && \
